@@ -12,9 +12,9 @@ These scripts were built on Windows Server, using [python](https://python.org) 3
 # Run steps
 
 1. Check for any [updates to the nextclade config](https://github.com/nextstrain/nextclade_data/releases), if needed re-run Setup step 3.
-2. Download your .fasta files into the input sub-folder. If you want to process the "All sequences" FASTA archive, you can use the script nextclade-unpack-input.py to unpack the .tar.xz file.
-4. Run the script nextclade-run.py. This will produce .tsv files in the output sub-folder. The script deletes all but a few key columns. Note this script will skip any files that already exist in the output sub-folder (ignoring the file extension).
-5. If you have processed the "All sequences" FASTA archive, the output sequences.tsv file has an issue with the seqName column format. This is fixed by the script: nextclade-fix-seqName.py, which looks up the expected seqName values from a GISAID metadata file.
+2. Download your .fasta files into the input sub-folder. If you want to process the "All sequences" FASTA archive, you can use the script **nextclade-unpack-input.py** to unpack the .tar.xz file.
+4. Run the script **nextclade-run.py**. This will produce .tsv files in the output sub-folder. The script deletes all but a few key columns. Note this script will skip any files that already exist in the output sub-folder (ignoring the file extension).
+5. If you have processed the "All sequences" FASTA archive, the output sequences.tsv file has an issue with the seqName column format. This is fixed by the script: **nextclade-fix-seqName.py**, which looks up the expected seqName values from a GISAID metadata file (should be the same age or more recent than the "All sequences" FASTA archive).
 
 # Environment requirements
 
@@ -22,7 +22,11 @@ Rough run times, on a 8 vcpu machine:
 - 2 hours - download and unpack the "All sequences" FASTA archive (once off)
 - 15 hours - reprocess the "All sequences" FAST archive (once or twice a months)
 
-Processing the "All sequences" FASTA archive needs around 400GB free disk space.  Daily data for the global GISAID sequences requires around 
+Processing the "All sequences" FASTA archive needs around 400GB free disk space (as of early 2023).  Daily data for the global GISAID sequences requires around 400MB per day.
+
+I downloaded the "All sequences" FASTA archive once, and then have downloaded the daily FASTA data since.
+
+When the nextclade config is updated (typically once or twice per month), I delete all the files in the output subfolder and carry out the **Run steps** above to re-categorise all lineages.
 
 # Other scripts
 
