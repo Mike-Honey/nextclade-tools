@@ -1,7 +1,7 @@
 # nextclade-tools
-Python scripts and notes for running the [nextclade cli tool](nextclade.org). Nextclade produces lineage classifications from genomic sequencing data, e.g. the GISAID database of SARS-CoV-2 sequences. Nextclade's lineages are considered more accurate by most experts, and the classification configuration is updated faster for new lineages.
+Python scripts and notes for running the [nextclade cli tool](https://nextclade.org). Nextclade produces lineage classifications from genomic sequencing data, e.g. the [GISAID](https://gisaid.org) database of SARS-CoV-2 sequences. Nextclade's lineages are considered more accurate by most experts, and the classification configuration is updated faster for new lineages.
 
-These scripts were built on Windows Server, using [python](python.org) 3.11. The only package dependency is pandas.
+These scripts were built on Windows Server, using [python](https://python.org) 3.11. The only package dependency is pandas.
 
 # Setup / config steps
 
