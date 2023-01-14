@@ -6,7 +6,8 @@ These scripts were built on Windows Server, using [python](python.org) 3.11. The
 # Setup / config steps
 
 1. Create a base folder e.g. C:\dev\nextclade, with subfolders data, input and output.
-2. Download and extract nextclade exe file into that folder. Usually it's filename includes the version number - rename to nextclade.exe for convenience.
+2. Download the nextclade cli file into that folder. Usually it's filename includes the version number e.g. `nextclade-x86_64-pc-windows-gnu.exe`
+ - rename to nextclade.exe for convenience.
 3. Download the latest nextclade config by running this command line > `nextclade dataset get --name "sars-cov-2" --output-dir "data/sars-cov-2"`
 
 # Run steps
