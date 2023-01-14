@@ -1,0 +1,15 @@
+cd c:\dev\nextclade
+
+nextclade dataset get --name "sars-cov-2" --output-dir "data/sars-cov-2"
+
+nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\OCE-2022-11.tsv input\OCE-2022-11.fasta
+nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ASI_ISR-2022-11.tsv input\ASI_ISR-2022-11.fasta
+nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ASI_SIN-2022-11.tsv input\ASI_SIN-2022-11.fasta
+nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ASI_PHI-2022-11.tsv input\ASI_PHI-2022-11.fasta
+
+Header
+Virus name|Accession ID|Collection date - text
+
+in wsl, cd c:/dev/nextclade
+tsv-utils-v2.2.0_linux-x86_64_ldc2/bin/tsv-filter ../sars-cov-2-genomes/metadata.tsv -H --str-in-fld 'Submission*:2022-10' | xz -c -2 > data/metadata_2022-10.tsv.xz
+
