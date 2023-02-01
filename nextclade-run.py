@@ -8,7 +8,7 @@ def main():
     Main - program execute
     """
     print (str(datetime.datetime.now()) + ' Starting ...')
-    datadir = 'C:/Dev/nextclade/'
+    datadir = 'C:/Dev/nextclade-tools/'
     nextclade_cmd_template = 'nextclade run --input-dataset ' + \
         datadir + 'data\sars-cov-2 -q --output-tsv=' + \
         datadir + 'output\[filename].tsv ' + \

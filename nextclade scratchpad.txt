@@ -1,4 +1,4 @@
-cd c:\dev\nextclade
+cd c:\dev\nextclade-tools
 
 nextclade dataset get --name "sars-cov-2" --output-dir "data/sars-cov-2"
 

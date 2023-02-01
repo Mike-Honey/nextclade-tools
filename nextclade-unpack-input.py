@@ -8,7 +8,7 @@ def main():
     Main - program execute
     """
     print (str(datetime.datetime.now()) + ' Starting ...')
-    datadir = 'C:/Dev/nextclade/input/'
+    datadir = 'C:/Dev/nextclade-tools/input/'
     
     for file in os.listdir(datadir):
         filename = os.fsdecode(file)

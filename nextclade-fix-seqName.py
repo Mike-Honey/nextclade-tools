@@ -11,7 +11,7 @@ def main():
     Lookup the consistent value using the metadata.tsv file (from GISAID), assuming that is at least as up-to-date and your sequences.tsv file
     """
     print (str(datetime.datetime.now()) + ' Starting ...')
-    datadir = 'C:/Dev/nextclade/'
+    datadir = 'C:/Dev/nextclade-tools/'
     filename_metadata = 'C:/Dev/sars-cov-2-genomes/metadata.tsv'
     needed_columns_metadata = ['Virus name', 'Accession ID', 'Collection date', 'Submission date']
 

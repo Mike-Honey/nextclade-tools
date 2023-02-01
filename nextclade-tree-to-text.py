@@ -48,7 +48,7 @@ def main():
     """
     print (str(datetime.datetime.now()) + ' Starting ...')
     filename = 'tree.json'
-    datadir = 'C:/Dev/nextclade/data/sars-cov-2/'
+    datadir = 'C:/Dev/nextclade-tools/data/sars-cov-2/'
     
     with open(datadir + filename, 'r') as fh:
             tree_dict = json.load(fh)
