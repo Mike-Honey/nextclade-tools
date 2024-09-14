@@ -34,3 +34,9 @@ When the nextclade config is updated (typically once or twice per month), I dele
 
 ## nextclade-tree-to-text.py
 This script turns the lineage tree in the nextclade configuration data into a text file format, for easier processing with other tools.  It should be re-run each time the updated nextclade config is downloaded, see Setup step 3 above.
+
+## 🤝 Support
+
+Contributions, issues, feature requests and sponsorship are all welcome!
+
+Give a ⭐️ if you like this project!
