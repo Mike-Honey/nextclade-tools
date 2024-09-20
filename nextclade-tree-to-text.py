@@ -47,8 +47,14 @@ def main():
     Main - program execute
     """
     print (str(datetime.datetime.now()) + ' Starting ...')
-    filename = 'tree.json'
-    datadir = 'C:/Dev/nextclade-tools/data/sars-cov-2/'
+
+    # tree is updated by Nextclade releases 
+    filename = 'data/sars-cov-2/tree.json'
+
+    # nightly is from the nightly Nextclade builds
+    filename = 'nightly.json'
+
+    datadir = 'C:/Dev/nextclade-tools/'
     
     with open(datadir + filename, 'r') as fh:
             tree_dict = json.load(fh)
@@ -64,7 +70,7 @@ def main():
 
     print(df)
 
-    df.to_csv(datadir + str.replace(filename,".json",".tsv"), sep='\t')
+    df.to_csv(datadir + "tree.tsv", sep='\t')
 
     print (str(datetime.datetime.now()) + ' Finished!')
     exit()

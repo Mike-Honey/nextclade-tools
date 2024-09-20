@@ -2,7 +2,11 @@ cd c:\dev\nextclade-tools
 
 nextclade dataset get --name "sars-cov-2" --output-dir "data/sars-cov-2"
 
-nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\OCE-2022-11.tsv input\OCE-2022-11.fasta
+curl -o nightly.json "https://nextstrain.org/charon/getDataset?prefix=staging/nextclade/sars-cov-2"
+
+nextclade run -d sars-cov-2 --input-tree nightly.json -t test.tsv
+
+nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ALL-2023-01-23-1.tsv input\ALL-2023-01-23-1.fasta
 nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ASI_ISR-2022-11.tsv input\ASI_ISR-2022-11.fasta
 nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ASI_SIN-2022-11.tsv input\ASI_SIN-2022-11.fasta
 nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ASI_PHI-2022-11.tsv input\ASI_PHI-2022-11.fasta
@@ -10,6 +14,14 @@ nextclade run --input-dataset data\sars-cov-2 -q --output-tsv=output\ASI_PHI-202
 Header
 Virus name|Accession ID|Collection date - text
 
-in wsl, cd c:/dev/nextclade
+in wsl, cd c:/dev/nextclade-tools
 tsv-utils-v2.2.0_linux-x86_64_ldc2/bin/tsv-filter ../sars-cov-2-genomes/metadata.tsv -H --str-in-fld 'Submission*:2022-10' | xz -c -2 > data/metadata_2022-10.tsv.xz
 
+if Text.Contains ( ";C2,;F2,;C3A,;C6A,;C6B,;F6A,;F6B,;C7A,;C7B,;F3B,;F3C,;F3D,;C4,;C5,;F4,;F5" , ";" & [Indicator Code] & "," ) then [Indicator Code] else
+
+
+https://moorefoundation.sharepoint.com/sites/CMIIMSTeam/Shared Documents/Master Data/Indicator Data/2022/ | 13931 - TNC - 2023-03-16 - F3a_F3b_F3c_F3d - FORMATTED.xlsx | TNC_13931_F3c
+
+https://moorefoundation.sharepoint.com/sites/CMIIMSTeam/Shared Documents/Master Data/Indicator Data/2022/ | 18553 - Capital For Climate - 2023-03-16 - F3b - FORMATTED.xlsx | GranteeShortName_GrantID_C7a
+
+vNext promoted to Live
