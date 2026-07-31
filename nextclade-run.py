@@ -10,21 +10,21 @@ def main():
     Main - program execute
     """
     print (str(datetime.datetime.now()) + ' Starting ...')
-    datadir = 'C:/Dev/nextclade-tools/'
+    datadir = r'C:/Dev/nextclade-tools/'
 
     # files with a lower/earlier file name will not be processed
     earliest_file_prefix = "ALL-2023-12-23"
 
     # for running nextclade using release definition data
-    nextclade_cmd_template = 'nextclade run --input-dataset ' + \
-        datadir + 'data\sars-cov-2 -q --output-tsv=' + \
-        datadir + 'output\[filename].tsv ' + \
-        datadir + 'input\[filename].fasta'
+    nextclade_cmd_template = r'nextclade run --input-dataset ' + \
+        datadir + r'data\sars-cov-2 -q --output-tsv=' + \
+        datadir + r'output\[filename].tsv ' + \
+        datadir + r'input\[filename].fasta'
 
     # for running nextclade using nightly definition data
-    nextclade_cmd_template = 'nextclade run -d sars-cov-2 --input-tree nightly.json -q --output-tsv=' + \
-        datadir + 'output\[filename].tsv ' + \
-        datadir + 'input\[filename].fasta'
+    nextclade_cmd_template = r'nextclade run -d sars-cov-2 --input-tree nightly.json -q --output-tsv=' + \
+        datadir + r'output\[filename].tsv ' + \
+        datadir + r'input\[filename].fasta'
     
     needed_columns = ['seqName', 'clade', 'Nextclade_pango', 'partiallyAliased']
 

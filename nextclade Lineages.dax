@@ -1,0 +1,99 @@
+nextclade Lineages = 
+VAR t_1 = 
+ADDCOLUMNS( 
+    FILTER (
+        DISTINCT('nextclade'[Lineage (nextclade)] ) , 
+        'nextclade'[Lineage (nextclade)] > "" 
+        ),
+    "Lineage L1 Len", SEARCH( ".", 'nextclade'[Lineage (nextclade)], 1 , 0 )
+    )
+VAR t_2 =
+ADDCOLUMNS( 
+    t_1,
+    "Lineage L1", IF ( [Lineage L1 Len] = 0, [Lineage (nextclade)] & ".*",  LEFT( [Lineage (nextclade)], [Lineage L1 Len] - 1 ) & ".*" ),
+    "Lineage L2 Len", IF ( [Lineage L1 Len] = 0 , 0 , SEARCH( ".", [Lineage (nextclade)], [Lineage L1 Len] + 1 , 0 ) )
+)
+VAR t_3 =
+ADDCOLUMNS( 
+    ADDCOLUMNS( 
+        t_2,
+        "Lineage L2 step 1", 
+        IF ( [Lineage L2 Len] = 0, 
+            [Lineage (nextclade)]  & ".*", 
+            LEFT( [Lineage (nextclade)], [Lineage L2 Len] - 1 ) & ".*" ),
+        "Lineage Code", 
+        [Lineage (nextclade)] 
+        ),
+    "Lineage L2", 
+        SWITCH ( TRUE(),
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "AY." } , "Delta" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "BC.", "BD." } , "BA.1.*" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "PQ.", "RC.", "RH.", "RJ.", "RK.", "RQ.", "RR.", "RY.", "RZ.", "SA.", "SF.", "SG.", "SH.", "SV.", "SY.", "SZ.", "TD." } , "NB.1.8.1.* Nimbus" ,
+            [Lineage (nextclade)] IN { "NB.1.8.1" } , "NB.1.8.1.* Nimbus" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "NW.", "NY.", "PD.", "PF.", "PP.", "PR.", "QE.", "QH.", "QM.", "QU.", "RG." } , "LP.8.1.*" ,
+            LEFT ( [Lineage (nextclade)] , 7 ) IN { "LP.8.1." } , "LP.8.1.*" ,
+            [Lineage (nextclade)] IN { "LP.8.1" } , "LP.8.1.*" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "MC.", "PA.", "PE.", "PG.", "PH.", "PJ.", "QP." } , "JN.1.* +DeFLuQE" ,
+            LEFT ( [Lineage L2 step 1] , 5 ) IN { "MR.1.", "NV.1." } , "JN.1.* +DeFLuQE" ,
+            [Lineage (nextclade)] IN { "KP.3.1.1", "KP.3.3.5", "KP.3.3.6", "MR.1", "NV.1" } , "JN.1.* +DeFLuQE" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "LW.", "MK.", "ML.", "MM.", "MR.", "MT.", "MY.", "NF.", "NP.", "NQ.", "NR.", "PB.", "PM." } , "JN.1.* +FLuQE" ,
+            LEFT ( [Lineage L2 step 1] , 5 ) IN { "KP.3." } , "JN.1.* +FLuQE" ,
+            [Lineage (nextclade)] IN { "JN.1.16.4", "JN.1.16.5", "KP.3" } , "JN.1.* +FLuQE" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "LD.", "LF.", "LH.", "LP.", "MH.", "MW.", "NC.", "ND.", "NE.", "NG.", "NH.", "NJ.", "NK.", "NM.", "NN.", "NT.", "NZ.", "PC.", "PL.", "PV.", "PW.", "PY.", "PZ.", "QA.", "QB.", "QC.", "QD.", "QJ.", "QR.", "QV.", "RF." } , "JN.1.* +FLiRT" ,
+            LEFT ( [Lineage L2 step 1] , 5 ) IN { "KP.2.", "KR.1.", "KR.2.", "KR.3.", "KS.1.", "KU.2.", "LA.1.", "LA.2.", "LB.1.", "LG.1.", "LM.1.", "LR.1.", "LQ.1.", "LT.1.", "LU.1.", "LV.2.", "LZ.1.", "LZ.2.", "MD.1.", "MF.1.", "MJ.1.", "MQ.1.", "NU.1." } , "JN.1.* +FLiRT" ,
+            LEFT ( [Lineage (nextclade)] , 7 ) IN { "KP.1.1.", "KP.4.1.", "KP.4.2.", "KZ.1.1.", "LE.1.1.", "LN.1.1.", "MD.3.1.", "MJ.2.1.", "NF.1.5." } , "JN.1.* +FLiRT" ,
+            [Lineage (nextclade)] IN { "JN.1.16.1", "JN.1.18.4", "JN.1.18.5", "JN.1.18.6", "JN.1.39.1", "JN.1.48.1", "JN.1.50.1", "JN.1.56.1", "JQ.2.1.1", "KP.1.1", "KP.2", "KP.4.1", "KP.4.2", "KR.1", "KR.2", "KR.3", "KS.1", "KU.2", "KZ.1.1", "LA.1", "LA.2", "LB.1", "LE.1.1", "LG.1", "LM.1", "LN.1.1", "LQ.1", "LR.1", "LT.1", "LU.1", "LV.2", "LZ.1", "MD.1", "MD.3.1", "MF.1", "MJ.1", "MJ.2.1", "NF.1.5", "NU.1" } , "JN.1.* +FLiRT" ,
+            LEFT ( [Lineage (nextclade)], 7 ) IN { "BA.2.86" } , "BA.2.86.*" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "JN.", "JQ.", "KP.", "KQ.", "KR.", "KS.", "KU.", "KV.", "KW.", "KY.", "KZ.", "LA.", "LB.", "LC.", "LE.", "LG.", "LJ.", "LK.", "LL.", "LM.", "LN.", "LQ.", "LR.", "LS.", "LT.", "LU.", "LV.", "LY.", "LZ.", "MA.", "MB.", "MD.", "ME.", "MF.", "MG.", "MJ.", "MN.", "MP.", "MQ.", "MS.", "MU.", "MV.", "MZ.", "NA.", "NL.", "NS.", "PK.", "PS." } , "BA.2.86.*" ,
+            LEFT ( [Lineage L2 step 1] , 3 ) IN { "BG.", "BH.", "BJ.", "BP.", "BS.", "CM.", "DD.", "FV.", "GH." } , "BA.2.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "RD.", "RE.", "RS.", "RT.", "RU.", "SJ.", "SK.", "SL.", "SM.", "SN.", "SQ.", "SS." } , "BA.3.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "CS.", "DC." } , "BA.4.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "BE.", "BF.", "BK.", "BT.", "BU.", "BV.", "BW.", "BZ.", "CD.", "CE.", "CF.", "CG.", "CK.", "CL.", "CN.", "CP.", "CQ.", "CR.", "CT.", "CU.", "CY.", "DA.", "DB.", "DE.", "DF.", "DG.", "DH.", "DJ.", "DL.", "DQ.", "DY.", "DZ.", "EB.", "EQ." } , "BA.5.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "BQ.", "CC.", "CW.", "CZ.", "DK.", "DM.", "DN.", "DP.", "DR.", "DT.", "DU.", "DW.", "EA.", "EC.", "ED.", "EE.", "EF.", "EH.", "EN.", "ER.", "ES.", "ET.", "EV.", "EW.", "EY.", "EZ.", "FA.", "FB.", "FC.", "FF.", "FM.", "FN.", "FQ.", "JH." } , "BQ.*" ,
+            LEFT ( [Lineage (nextclade)], 6 ) IN { "CH.1.1" } , "CH.1.1.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "DV.", "FJ.", "FK.", "FS.", "GP.", "GQ.", "JL.", "JP.", "JV.", "KG." } , "CH.1.1.*" ,
+            LEFT ( [Lineage (nextclade)], 7 ) IN { "BA.2.75" } , "BA.2.75.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "BL.", "BM.", "BN.", "BR.", "BY.", "CA.", "CB.", "CH.", "CJ.", "CV.", "DS.", "EJ.", "EP.", "FR." } , "BA.2.75.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "GL." } , "XAY.*" ,
+            LEFT ( [Lineage (nextclade)], 7 ) IN { "XBB.1.5" } , "XBB.1.5.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "EK.", "EL.", "EM.", "EU.", "FD.", "FG.", "FH.", "FT.", "FZ.", "GB.", "GC.", "GF.", "GG.", "GK.", "GN.", "GR.", "GU.", "GV.", "HA.", "HC.", "HD.", "HJ.", "HM.", "HP.", "HQ.", "HR.", "HS.", "HT.", "HY.", "HZ.", "JB.", "JD.", "JK.", "JZ.", "KA.", "KK.", "KM.", "KN." } , "XBB.1.5.*" ,
+            LEFT ( [Lineage L2 step 1], 4 ) IN { "EG.5" } , "EG.5.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "HK.", "HV.", "JG.", "JJ.", "JR.", "KB.", "KL." } , "EG.5.*" ,
+            LEFT ( [Lineage (nextclade)], 8 ) IN { "FL.1.5.1" } , "FL.1.5.1.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "HN." } , "FL.1.5.1.*" ,
+            LEFT ( [Lineage (nextclade)], 7 ) IN { "XBB.1.9" } , "XBB.1.9.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "EG.", "FL.", "GD.", "GW.", "HN.", "KC.", "KE.", "KF." } , "XBB.1.9.*" ,
+            LEFT ( [Lineage (nextclade)], 8 ) IN { "XBB.1.16" } , "XBB.1.16.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "FU.", "GY.", "HF.", "JF.", "JM.", "KJ." } , "XBB.1.16.*" ,
+            LEFT ( [Lineage (nextclade)], 8 ) IN { "XBB.1.22" } , "XBB.1.22.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "FY.", "HU." } , "XBB.1.22.*" ,
+            LEFT ( [Lineage (nextclade)], 7 ) IN { "XBB.2.3" } , "XBB.2.3.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "GE.", "GJ.", "GM.", "GS.", "GZ.", "HG.", "HH.", "JA.", "JE.", "JS.", "JU.", "JY.", "JV.", "KH.", "KT." } , "XBB.2.3.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "FE.", "FP.", "FW.", "GA.", "HB.", "HE.", "HL.", "JC.", "JW." } , "XBB.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "GT.", "HW.", "JT.", "KD." } , "XBC.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "NB.", "PN.", "QL.", "QN." } , "XDV.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "PT.", "PU.", "QG." } , "XEC.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "QF.", "QK.", "QQ.", "QS.", "QT.", "QW.", "QY.", "QZ.", "RB.", "RL.", "RM.", "RN.", "RP.", "RV.", "SB.", "SC.", "SD.", "SE.", "SP.", "ST.", "SU.", "SW.", "TA.", "TB.", "TC." } , "XFG.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "RA.", "RW." } , "XFJ.*" ,
+            LEFT ( [Lineage L2 step 1], 3 ) IN { "SR." } , "XFW.*" ,
+            LEFT ( [Lineage L2 step 1], 1 ) IN { "X" } , [Lineage L1] ,
+            [Lineage L2 step 1]
+        )
+)
+RETURN
+--UNION(
+    ADDCOLUMNS( 
+        t_3,
+--        SELECTCOLUMNS( t_3, "Lineage", [Lineage] ),
+        "Lineage (detailed)", [Lineage (nextclade)],
+        "Lineage Level", "Detailed"
+    ) /*,
+    ADDCOLUMNS( 
+        SUMMARIZE( t_3, [Lineage L1], [Lineage] ),
+        "Lineage Level", "Level 1"
+    ),
+    ADDCOLUMNS( 
+        SUMMARIZE( t_3, [Lineage L2], [Lineage] ),
+        "Lineage Level", "Level 2"
+    )
+)*/
